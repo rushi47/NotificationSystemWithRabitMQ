@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <title>Wingify</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    
+body, html {
+  height: 100%;
+  margin: 0;
+  font: 400 15px/1.8 "Lato", sans-serif;
+  color: #777;
+}
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  position: relative;
+  opacity: 0.9;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.bgimg-1 {
+  background-color: black;
+  height: 100%;
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+
+.form{
+ position: absolute;
+  left: 25%;
+  top: 50%;
+  width: 50%;
+  text-align: center;
+  color: #000; 
+}
+.Submit {
+  position: absolute;
+  left: 45%;
+  top: 65%;
+  width: 40%;
+  color: white;
+  border: none;
+  opacity: 0.8;
+  text-align: center;
+  background-color: #FF4500;
+  text-decoration: none;
+   display: inline-block;
+}
+
+.borderform{
+  background-color: white;
+  color: white; 
+}
+
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+
+.border1{
+    background-color: #111;
+  color: #fff;
+  padding: 20px;
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+.caption span.border.channnel {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 20px;
+  letter-spacing: 10px;
+}
+a{
+  margin-left: 25px;
+}
+li{
+  margin-left:20px;
+}
+
+h3 {
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font: 20px "Lato", sans-serif;
+  color: #111;
+}
+
+  </style>
+</head>
+<body>
+<!-- <div class="container">
+  <div id="banner", class="jumbotron">
+    <h1><font color="white">Welcome to Wingify</font></h1>      
+    <p id="techGeek">{ Home of TechGeeks /></p>
+  </div>  
+</div> -->
+<div class="bgimg-1">
+  <div class="caption">
+    <span class="border">Welcome to Wingify channels</span><br>
+   
+  </div>
+  
+
+<div class="borderform"> 
+    <div class="form border1">
+        <form action="/user" method="POST">
+          <div class="col-sm-4">
+            <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
+            <div class="input-group mb-2 mb-sm-0">
+              <div class="input-group-addon">@</div>
+              <input type="text" class="form-control" name="username" placeholder="AwsomeUsername">
+            </div>
+          </div>
+        
+          <div class="col-sm-3">
+          
+              <select class="form-control" name="channel">
+                  <option>Channel to subscribe</option>
+                  <option value="1">Wingify</option>
+              </select>
+            </div>
+          <div class="col-sm-3">
+              <div class="col-auto">
+                <button type="submit" class="Submit btn btn-primary">Submit</button>
+              </div>
+            
+          </div>
+        
+    </form>
+    </div>
+</div>
+</div>
+
+
+
+
+</body>
+</html>

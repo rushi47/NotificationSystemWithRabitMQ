@@ -1,0 +1,230 @@
+<!doctype html>  
+<html lang="en">  
+   <head>
+        <script src="/socket.io/socket.io.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script>  
+		       var socket = io.connect('http://localhost:5000',{transports: ['websocket'], upgrade: false});
+		        socket.on('connect', function(msg) {
+		          socket.emit('join', 'Hello World from client');
+             });
+    
+        </script> 
+<style>
+body, html {
+  height: 100%;
+  margin: 0;
+  font: 400 15px/1.8 "Lato", sans-serif;
+  color: #777;
+}
+
+.bgimg-1, .bgimg-2, .bgimg-3 {
+  position: relative;
+  opacity: 0.9;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.bgimg-1 {
+  background-color: black;
+  height: 100%;
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  top: 10%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+
+.form{
+ position: absolute;
+  left: 30%;
+  top: 50%;
+  width: 50%;
+  text-align: center;
+  color: #000; 
+}
+.Submit {
+  position: absolute;
+  left: 45%;
+  top: 65%;
+  width: 40%;
+  color: white;
+  border: none;
+  opacity: 0.8;
+  text-align: center;
+  background-color: #FF4500;
+  text-decoration: none;
+   display: inline-block;
+}
+
+.borderform{
+  background-color: white;
+  color: white; 
+}
+
+.caption span.border {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 25px;
+  letter-spacing: 10px;
+}
+
+.caption span.border.channnel {
+  background-color: #111;
+  color: #fff;
+  padding: 18px;
+  font-size: 20px;
+  letter-spacing: 10px;
+}
+
+.dropdown-menu{
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 200px;
+}
+
+h3 {
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font: 20px "Lato", sans-serif;
+  color: #111;
+}
+
+.dropdown-header{
+ letter-spacing: 1px;
+  text-transform: uppercase;
+  font: 10px "Lato", sans-serif;
+  color: #111; 
+}
+.selectBox{
+  border-radius:4px;
+  border:1px solid #AAAAAA;
+}
+
+.badge1 {
+   position:relative;
+}
+.badge1[data-badge]:after {
+   content:attr(data-badge);
+   position:absolute;
+   top:1px;
+   right:1px;
+   font-size:.7em;
+   background:#FF4500;
+   color:white;
+   width:18px;height:18px;
+   text-align:center;
+   line-height:18px;
+   border-radius:50%;
+   box-shadow:0 0 1px #333;
+}
+
+#scrollbar{
+  margin-left: 4px;
+  font-size: 0.9em;
+
+}
+hr {
+  margin: 1px;
+  padding: 3px; 
+}
+            
+#note{
+  margin-left: 30%;
+  color: white,
+}
+
+</style> 
+</head>
+<body>
+<div class="bgimg-1">
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">git/rushi47</a>
+    </div>
+     <ul class="nav navbar-nav navbar-right">
+            <form class="navbar-form navbar-left">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">
+                    <i class="glyphicon glyphicon-search"></i>
+                  </button>
+                </div>
+              </div>
+            </form>
+           <li><a href="#" class="dropdown-toggle badge1" id="notifCount" data-badge="27" data-toggle="dropdown"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span></a> 
+             <ul class="dropdown-menu">
+              <h3 class="dropdown-header badge1" data-badge="27" href="#">Notifications</h3>
+              <hr>
+              <div class="dropdown-divider"></div>
+                <div id="scrollbar">  
+                  
+              <div>
+            </ul>
+           </li>
+          <li><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> </a></li>
+      </ul>
+  </div>
+</nav>
+<div id="note">
+* <h4>Make sure that opening this windows should pin Hello word and Connected client in console</h4>
+  <h4>Unless and until Socket is established app will not work</h4>
+* Reload to get new notification<br>
+* Notification are generate perodically in db.<br> 
+* It uses causal to get random names.
+* Time of notification can be set under models => posts.<br>
+* However notification are consumed from RabitMQ.<br>
+* On page reload Socket.io makes call to consume.
+* And stays their until you click the Notification icon.<br>
+* Once click notification get marked seen in backed => Activity collection.<br>
+
+
+</div>
+</div>
+<script type="text/javascript">
+    var length
+   var masterData=[]
+   socket.on('messages', function(data){
+                masterData.unshift(data);
+                data = eval('('+data+')');
+                var post
+                for(var i in data){
+                    // length++;                     // counter++;
+                     post = JSON.stringify(data[i]["post"]);
+                  $("ul #scrollbar").prepend("<li>"+post+"</li><hr>");
+                 }
+                // length = masterData.length;
+                $("li .badge1").attr('data-badge', data.length);
+
+               
+    });  
+
+    $("li").click(function(){
+         var destroy = eval('('+masterData+')');  
+          socket.emit("seen", destroy);
+            masterData.length =0;
+            $("li .badge1").data('data-badge');
+            setTimeout(function(){
+                  length = 0;
+                  $("li .badge1").attr('data-badge', length);
+                
+            },1000);
+    });
+</script>
+</body>
+
+                   
+             
+</html>  
